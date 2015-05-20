@@ -1,0 +1,210 @@
+/*------------------------------------*\
+    #MIXINS
+\*------------------------------------*/
+
+
+/**
+  * Rounded Corners
+*/
+
+
+@mixin rounded($radius) {
+    -webkit-border-radius: $radius;
+       -moz-border-radius: $radius;
+            border-radius: $radius;
+}
+
+
+/**
+  * Apply ‘attention’ styles in one go.
+*/
+
+
+@mixin attention($self: false) {
+
+    @if($self != false) {
+        &,
+        &:hover,
+        &:active,
+        &:focus {
+            @content;
+        }
+    }
+
+    @else {
+        &:hover,
+        &:active,
+        &:focus {
+            @content;
+        }
+    }
+
+}
+
+
+/**
+  * Lets have a box shadow
+*/
+
+
+@mixin shadow($x, $y, $blur, $color) {
+    -webkit-box-shadow: $x $y $blur $color;
+       -moz-box-shadow: $x $y $blur $color;
+            box-shadow: $x $y $blur $color;
+}
+
+
+/**
+  * Maybe you want to have a shadow inset
+*/
+
+
+@mixin shadow-inset($x, $y, $blur, $color) {
+    -webkit-box-shadow: inset $x $y $blur $color;
+       -moz-box-shadow: inset $x $y $blur $color;
+            box-shadow: inset $x $y $blur $color;
+}
+
+
+/**
+  * Lets use these transistions more cleanly in our code
+*/
+
+
+@mixin transition($property, $time, $ease) {
+    -webkit-transition: $property $time $ease;
+       -moz-transition: $property $time $ease;
+         -o-transition: $property $time $ease;
+            transition: $property $time $ease;
+}
+
+
+
+/**
+  * Can't live without the Border Box
+*/
+
+@mixin box-sizing($border-box) {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+
+/**
+  * CSS Gradients are popular but has ulgy code
+*/
+
+@mixin linear-gradient($from, $to) {
+    // Fallback for sad browsers
+    background-color: $to;
+    // Mozilla Firefox
+    background-image: -moz-linear-gradient($from, $to);
+    // Opera
+    background-image: -o-linear-gradient($from, $to);
+    // Webkit (Safari 4+, Chrome 1+)
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, $from), color-stop(1, $to));
+    // Webkit (Chrome 11+)
+    background-image: -webkit-linear-gradient($from, $to);
+    // IE 10
+    background-image: -ms-linear-gradient($from, $to);
+    // W3C
+    background-image: linear-gradient($from, $to);
+}
+
+
+/**
+  * Clear after floats
+*/
+
+@mixin clearfix {
+    zoom:1;
+
+    &:before, &:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+
+/**
+  * Apply clearfix to this classes by default
+*/
+
+.clearfix, .group{
+    @include clearfix;
+}
+
+
+/**
+  * Convert font-size from px to rem with px fallback
+  * @param $size - the value in pixel you want to convert
+  * Credit - http://bit.ly/1H7jo0n
+  * e.g. p { @include fontSize(12px); }
+*/
+
+@function calculateRem($size) {
+    $remSize: $size / 16px;
+    @return $remSize * 1rem;
+}
+
+
+/**
+  * Function for converting a px based font-size to rem.
+*/
+
+@mixin font-size($size) {
+    font-size: $size;
+    font-size: calculateRem($size);
+}
+
+
+/**
+  * Mixin that will include the fall back px declaration
+  * as well as the calculated rem value.
+*/
+
+@mixin line-height($size) {
+    line-height: $size;
+    line-height: calculateRem($size);
+}
+
+
+/**
+  * Responsive mixins
+  * Available to use inline or on its own
+  * Avialble with Mobile First or Basic RWD your choice
+  * Sometimes we need to have a breakpoint min & max width - here you go
+*/
+
+
+@mixin responsive($res)
+{
+  @media screen and (max-width: $res)
+  {
+    @content;
+  }
+}
+
+@mixin mobilefirst($res)
+{
+  @media screen and (min-width: $res)
+  {
+    @content;
+  }
+}
+
+@mixin mobilefirst-between($start, $end)
+{
+  @media screen and (min-width: $start) and (max-width : $end)
+  {
+    @content;
+  }
+}
+

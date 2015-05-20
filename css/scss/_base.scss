@@ -1,0 +1,87 @@
+/*------------------------------------*\
+    #BASE
+\*------------------------------------*/
+
+
+body {
+    color: $body-colour;
+    background: $foreground-colour;
+    @include font-size(16px);
+    @include line-height(23px);
+
+    /* Fix for webkit rendering */
+
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+}
+
+
+
+/**
+  * Typography
+*/
+
+
+p {
+    @include font-size(16px);
+    @include line-height(22px);
+    margin-bottom: 15px;
+}
+
+
+/**
+  * Links
+*/
+
+
+a {
+    color: $body-colour;
+    text-decoration: underline;
+}
+
+
+/**
+  * Forms
+*/
+
+
+/**
+  * Images
+*/
+
+
+img {
+    border: none;
+}
+
+
+/**
+  * General / Combo
+*/
+
+
+img,video,audio,iframe,object{
+    max-width:100%;
+}
+
+
+
+
+/**
+  * Center a div in the middle
+  * Sometimes we need this to center a logo in the middle
+  * You know what to do
+*/
+
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 100;
+}
+
