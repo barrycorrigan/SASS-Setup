@@ -5,7 +5,7 @@ This is my SASS setup for new projects. In version 3 of Sass, the SCSS (Sassy CS
 #### Include this in the head of your project
 
 ~~~
-<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/main.css">
 ~~~
 
 # Editing SASS
